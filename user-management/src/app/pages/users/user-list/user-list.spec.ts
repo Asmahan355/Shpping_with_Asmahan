@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../../../core/services/user.service';
+import { User } from '../../../core/models/user.model';
 
-import { UserList } from './user-list';
+@Component({
+  selector: 'app-user-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './user-list.html'
+})
+export class UserListComponent implements OnInit {
 
-describe('UserList', () => {
-  let component: UserList;
-  let fixture: ComponentFixture<UserList>;
+  users: User[] = [];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [UserList]
-    })
-    .compileComponents();
+  constructor(private userService: UserService) {}
 
-    fixture = TestBed.createComponent(UserList);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  ngOnInit(): void {
+    this.users = this.userService.getUsers();
+  }
+}
