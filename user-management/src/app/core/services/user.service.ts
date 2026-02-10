@@ -72,4 +72,18 @@ export class UserService {
     const users = this.getUsers().filter(u => u.id !== id);
     localStorage.setItem(this.storageKey, JSON.stringify(users));
   }
+    getUserById(id: number):User | undefined {
+      return this.getUsers().find(user=>user.id===id);
+  }
+    updateUser(id: number, data: { name: string; email: any; }):void{
+      const users = this.getUsers();
+    for (let i = 0; i < users.length; i++) {
+    if (users[i].id === id) {
+      users[i].name = data.name;
+      users[i].email = data.email;
+      break;
+    }
+  }
+      localStorage.setItem(this.storageKey, JSON.stringify(users));
+  }
 }

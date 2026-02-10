@@ -3,5 +3,11 @@
 <ul>
   <li *ngFor="let user of users">
     {{ user.name }} — {{ user.email }}
+    <button (click)="deleteUser(user.id)">
+      Supprimer
+    </button>
+    <button [routerLink]="['/users/edit',user.id]">
+      Modifier
+    </button>
   </li>
 </ul>
