@@ -19,14 +19,23 @@ export class UserListComponent implements OnInit{
     this.users = this.userService.getUsers();
   }
   deleteUser(id:number):void{
+    //confirm() : fonction JavaScript simple => renvoie true si l’utilisateur clique sur OK/ envoie false si l’utilisateur clique sur Annuler
+    const confirmation=confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+
+    if(!confirmation)
+    {
+      return;
+    }
 
     this.userService.deleteUser(id);
     this.users = this.userService.getUsers();
 
     this.message='Utilisateur supprimé avec succès';
 
-    setTimeout(()=>{
-      this.message='';
-    },2000);
+    setTimeout(() => {
+      //console.log('timeout déclenché');
+      this.message = '';
+    }, 2000);
+
   }
 }
