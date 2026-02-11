@@ -1,5 +1,5 @@
 <h2>Liste des utilisateurs</h2>
-
+<p *ngIf="message">{{message}}</p>
 <ul>
   <li *ngFor="let user of users">
     {{ user.name }} — {{ user.email }}

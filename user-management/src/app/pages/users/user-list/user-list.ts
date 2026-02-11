@@ -12,14 +12,21 @@ import { User } from '../../../core/models/user.model';
 })
 export class UserListComponent implements OnInit{
   users: User[] = [];
+  message = '';
 
   constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.users = this.userService.getUsers();
   }
   deleteUser(id:number):void{
+
     this.userService.deleteUser(id);
     this.users = this.userService.getUsers();
-  }
 
+    this.message='Utilisateur supprimé avec succès';
+
+    setTimeout(()=>{
+      this.message='';
+    },2000);
+  }
 }

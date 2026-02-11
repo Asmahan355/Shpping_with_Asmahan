@@ -1,5 +1,5 @@
 <h2>Ajouter un utilisateur</h2>
-
+<p *ngIf="message">{{message}}</p>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
   <div>

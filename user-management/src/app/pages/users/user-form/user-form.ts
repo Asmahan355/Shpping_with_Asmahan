@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-form.html'
 })
 export class UserFormComponent {
+  message=''
 
   userForm!: FormGroup;
   //Le constructeur = au chargement de la page
@@ -68,6 +69,10 @@ export class UserFormComponent {
       email: this.userForm.value.email!
     });
   }
-    this.router.navigate(['/users']);
+    this.message=id?'Utilisateur modifié avec succès':'Utilisateur ajouté avec succès'
+    //éviter la navigation immédiate
+    setTimeout(()=>{
+       this.router.navigate(['/users']);
+    },1500);
   }
 }
