@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,FormsModule],
   templateUrl: './user-list.html'
 })
 export class UserListComponent implements OnInit{
   users: User[] = [];
   message = '';
+  searchTerm = '';
 
   constructor(private userService: UserService) {}
   ngOnInit(): void {
@@ -38,4 +40,10 @@ export class UserListComponent implements OnInit{
     }, 2000);
 
   }
+
+  filterUsers(): User[] {
+  return this.users.filter(user =>
+    user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) //pour savoir si le nom contient ce que l’utilisateur a tapé (includes)
+  );
+}
 }
