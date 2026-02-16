@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserFormComponent {
   message=''
+  isEditMode = false;
 
   userForm!: FormGroup;
   //Le constructeur = au chargement de la page
@@ -37,6 +38,8 @@ export class UserFormComponent {
 
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if(id){
+      this.isEditMode = true;
+
       const user=this.userService.getUserById(id);
       if(user){
         this.userForm.patchValue({

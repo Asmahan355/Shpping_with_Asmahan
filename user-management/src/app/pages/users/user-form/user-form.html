@@ -1,19 +1,29 @@
-<h2>Ajouter un utilisateur</h2>
-<p *ngIf="message">{{message}}</p>
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<div class="container mt-5" style="max-width: 500px;">
 
-  <div>
-    <label>Nom</label><br />
-    <input type="text" formControlName="name" />
-  </div>
+  <h2 class="mb-4 text-center">
+   {{ isEditMode ? 'Modifier un utilisateur' : 'Ajouter un utilisateur' }}
+  </h2>
 
-  <div>
-    <label>Email</label><br />
-    <input type="email" formControlName="email" />
-  </div>
+  <p *ngIf="message" class="alert alert-success">
+    {{ message }}
+  </p>
 
-  <button type="submit" [disabled]="userForm.invalid">
-    Ajouter
-  </button>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-</form>
+    <div class="mb-3">
+      <label>Nom</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+    </div>
+    <!--w-100 = bouton pleine largeur-->
+    <button type="submit" class="btn btn-success w-100" [disabled]="userForm.invalid">
+      {{isEditMode?'Modifier':'Ajouter'}}
+    </button>
+
+  </form>
+
+</div>
