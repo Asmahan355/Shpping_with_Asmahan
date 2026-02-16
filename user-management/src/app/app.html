@@ -1,3 +1,20 @@
-<h1>Gestion des utilisateurs</h1>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
 
+    <a class="navbar-brand" routerLink="/users">
+      Gestion Utilisateurs
+    </a>
+
+    <div class="navbar-nav">
+      <a class="nav-link" routerLink="/users">
+        Liste
+      </a>
+      <a class="nav-link" routerLink="/add-user">
+        Ajouter
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
