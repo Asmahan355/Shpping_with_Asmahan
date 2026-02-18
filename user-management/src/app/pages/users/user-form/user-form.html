@@ -13,11 +13,17 @@
     <div class="mb-3">
       <label>Nom</label>
       <input type="text" class="form-control" formControlName="name" />
+      <div class="text-danger" *ngIf="userForm.controls['name'].touched && userForm.controls['name'].invalid">
+        Nom obligatoire
+      </div>
     </div>
 
     <div class="mb-3">
       <label>Email</label>
       <input type="email" class="form-control" formControlName="email" />
+      <div class="text-danger" *ngIf="userForm.controls['email'].touched && userForm.controls['email'].invalid">
+        Email obligatoire
+      </div>
     </div>
     <!--w-100 = bouton pleine largeur-->
     <button type="submit" class="btn btn-success w-100" [disabled]="userForm.invalid">
