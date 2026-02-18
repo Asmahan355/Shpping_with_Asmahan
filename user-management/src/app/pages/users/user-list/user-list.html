@@ -1,22 +1,38 @@
 <div class="container mt-4">
-<div class="d-flex justify-content-between align-items-center mb-3">
-<h2>Liste des utilisateurs</h2>
-  <a class="btn btn-success" routerLink="/add-user">
-     Ajouter un utilisateur
-  </a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+  <h2 class="mb-0">Liste des utilisateurs</h2>
+
+  <div class="d-flex align-items-center gap-2">
+
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      placeholder="Rechercher..."
+      [(ngModel)]="searchTerm"
+      style="width:250px"
+    />
+
+    <button class="btn btn-light border btn-sm" (click)="sortUsers()">
+            <i class="bi bi-sort-alpha-down me-1"></i>
+      Trier
+    </button>
+
+    <a class="btn btn-light border btn-sm" routerLink="/add-user">
+      Ajouter
+    </a>
+
+  </div>
+
 </div>
 <p *ngIf="message" class="alert alert-success">{{message}}</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
 
+
+
+</div>
 <div *ngIf="users.length === 0" class="alert alert-info mt-3">
   Aucun utilisateur trouvé.
-</div>
-<div class="mb-3">
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Rechercher par le nom d'utilisateurs ..."
-    [(ngModel)]="searchTerm"
-  />
 </div>
 
 <ul *ngIf="users.length > 0" class="list-group mt-3">

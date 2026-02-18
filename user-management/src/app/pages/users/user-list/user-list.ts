@@ -46,4 +46,7 @@ export class UserListComponent implements OnInit{
     user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) //pour savoir si le nom contient ce que l’utilisateur a tapé (includes)
   );
 }
+  sortUsers():void{
+    this.users.sort((a,b)=>a.name.localeCompare(b.name));
+  }
 }
