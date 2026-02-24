@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { Observable, of } from 'rxjs';
 
 
 /*
@@ -46,12 +47,13 @@ export class UserService {
     }
   }
 
-  getUsers(): User[] {
+  getUsers(): Observable<User[]> {
     if (typeof window === 'undefined') {
-      return [];
+      return of([]);
     }
 
-    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+    const users=JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+    return of(users);
   }
 
   addUser(user: User): void {
@@ -59,9 +61,11 @@ export class UserService {
       return;
     }
 
-    const users = this.getUsers();
-    users.push(user);
-    localStorage.setItem(this.storageKey, JSON.stringify(users));
+    this.getUsers().subscribe(users=>{
+      users.push(user);
+      localStorage.setItem(this.storageKey, JSON.stringify(users));
+    });
+    
   }
 
   deleteUser(id: number): void {
@@ -69,21 +73,37 @@ export class UserService {
       return;
     }
 
-    const users = this.getUsers().filter(u => u.id !== id);
-    localStorage.setItem(this.storageKey, JSON.stringify(users));
+    const users = this.getUsers().subscribe(users=>{
+    const updateUsers=users.filter(u => u.id !== id);
+    localStorage.setItem(this.storageKey, JSON.stringify(updateUsers));
+    });
   }
-    getUserById(id: number):User | undefined {
-      return this.getUsers().find(user=>user.id===id);
-  }
-    updateUser(id: number, data: { name: string; email: any; }):void{
-      const users = this.getUsers();
+getUserById(id: number): Observable<User | undefined> {
+
+  return new Observable(observer => {
+
+    this.getUsers().subscribe(users => {
+      const user = users.find(u => u.id === id);
+      observer.next(user);
+      observer.complete();
+    });
+
+  });
+}
+updateUser(id: number, data: { name: string; email: any }): void {
+
+  this.getUsers().subscribe(users => {
+
     for (let i = 0; i < users.length; i++) {
-    if (users[i].id === id) {
-      users[i].name = data.name;
-      users[i].email = data.email;
-      break;
+      if (users[i].id === id) {
+        users[i].name = data.name;
+        users[i].email = data.email;
+        break;
+      }
     }
-  }
-      localStorage.setItem(this.storageKey, JSON.stringify(users));
-  }
+
+    localStorage.setItem(this.storageKey, JSON.stringify(users));
+
+  });
+}
 }
