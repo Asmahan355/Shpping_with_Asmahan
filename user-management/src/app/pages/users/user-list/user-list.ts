@@ -18,7 +18,9 @@ export class UserListComponent implements OnInit{
 
   constructor(private userService: UserService) {}
   ngOnInit(): void {
-    this.users = this.userService.getUsers();
+    this.userService.getUsers().subscribe(users => {
+    this.users = users;
+  });
   }
   deleteUser(id:number):void{
     //confirm() : fonction JavaScript simple => renvoie true si l’utilisateur clique sur OK/ envoie false si l’utilisateur clique sur Annuler
@@ -30,8 +32,9 @@ export class UserListComponent implements OnInit{
     }
 
     this.userService.deleteUser(id);
-    this.users = this.userService.getUsers();
-
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+    });
     this.message='Utilisateur supprimé avec succès';
 
     setTimeout(() => {

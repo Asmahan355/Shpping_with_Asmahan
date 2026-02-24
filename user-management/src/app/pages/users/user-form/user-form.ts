@@ -40,14 +40,16 @@ export class UserFormComponent {
     if(id){
       this.isEditMode = true;
 
-      const user=this.userService.getUserById(id);
-      if(user){
+      const user=this.userService.getUserById(id).subscribe(user=>{
+         if(user){
         this.userForm.patchValue({
           name:user.name,
           email:user.email
         });
 
       }
+      });
+     
 
     }
 
