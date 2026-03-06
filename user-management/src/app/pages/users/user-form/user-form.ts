@@ -64,20 +64,31 @@ export class UserFormComponent {
       this.userService.updateUser(id,{
         name:this.userForm.value.name!,
         email:this.userForm.value.email!
-      });
+      }).subscribe(() => {
 
-    }else{
+      this.message = 'Utilisateur modifié avec succès';
+
+      setTimeout(() => {
+        this.router.navigate(['/users']);
+      }, 1500);
+
+    });
+
+  }else{
 
     this.userService.addUser({
       id: Date.now(),
       name: this.userForm.value.name!,
       email: this.userForm.value.email!
+    }).subscribe(() => {
+
+      this.message = 'Utilisateur ajouté avec succès';
+
+      setTimeout(() => {
+        this.router.navigate(['/users']);
+      }, 1500);
+
     });
   }
-    this.message=id?'Utilisateur modifié avec succès':'Utilisateur ajouté avec succès'
-    //éviter la navigation immédiate
-    setTimeout(()=>{
-       this.router.navigate(['/users']);
-    },1500);
   }
 }

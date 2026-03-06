@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 /*
   Pourquoi ce service existe et pourquoi on utilise localStorage :
 
-  - Angular ne garde pas les données en mémoire.
-    Quand l’application redémarre ou se recharge,
-    les variables sont réinitialisées.
+    - Angular ne garde pas les données en mémoire.
+        Quand l’application redémarre ou se recharge,
+            les variables sont réinitialisées.
 
   - Pour éviter de perdre la liste des utilisateurs,
     on les stocke dans le navigateur avec localStorage.
