@@ -1,11 +1,16 @@
 package com.asmahan.backend.model;
-import java.persistence.Entity;
-import java.persistence.id;
+import javax.annotation.processing.Generated;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 public class User{
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY) //la base de données génère l’id automatiquement
     private Long id;
     private String name;
     private String email;
