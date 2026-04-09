@@ -2,11 +2,13 @@ package com.asmahan.backend.model;
 import javax.annotation.processing.Generated;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.id;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
+@Table(name = "users")
 public class User{
 
     @Id
