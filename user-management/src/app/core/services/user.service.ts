@@ -30,7 +30,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  private apiUrl = 'https://turbo-waffle-4r49vqrvpgjf4j-8080.app.github.dev/api/users';
 
   constructor(private http: HttpClient) {}
 

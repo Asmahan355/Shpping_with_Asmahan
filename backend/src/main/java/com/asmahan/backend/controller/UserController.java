@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 // Autorise Angular (port 4200) à appeler le backend
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 public class UserController{
     private final UserService userService;
 
