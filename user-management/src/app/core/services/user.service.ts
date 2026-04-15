@@ -30,7 +30,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  private apiUrl = 'https://turbo-waffle-4r49vqrvpgjf4j-8080.app.github.dev/api/users';
+  private apiUrl = '/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -38,9 +38,9 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
-  addUser(user: User): Observable<User> {
-      return this.http.post<User>(this.apiUrl,user);
-    }
+addUser(user: { name: string; email: string }): Observable<User> {
+  return this.http.post<User>(this.apiUrl, user);
+}
 
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);

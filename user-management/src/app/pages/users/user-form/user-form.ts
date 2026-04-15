@@ -77,7 +77,6 @@ export class UserFormComponent {
   }else{
 
     this.userService.addUser({
-      id: Date.now(),
       name: this.userForm.value.name!,
       email: this.userForm.value.email!
     }).subscribe(() => {

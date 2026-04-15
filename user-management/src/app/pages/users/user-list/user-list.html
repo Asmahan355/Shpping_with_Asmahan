@@ -43,7 +43,7 @@
       <small class="text-muted">{{ user.email }}</small>
     </div>
     <div>
-    <button class="btn btn-danger btn-sm me-2" (click)="deleteUser(user.id)">
+    <button class="btn btn-danger btn-sm me-2" (click)="user.id!==undefined && deleteUser(user.id)">
       Supprimer
     </button>
     <button  class="btn btn-primary btn-sm" [routerLink]="['/users/edit',user.id]">
