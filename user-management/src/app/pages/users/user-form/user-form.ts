@@ -76,18 +76,18 @@ export class UserFormComponent {
 
   }else{
 
-    this.userService.addUser({
-      name: this.userForm.value.name!,
-      email: this.userForm.value.email!
-    }).subscribe(() => {
-
-      this.message = 'Utilisateur ajouté avec succès';
-
-      setTimeout(() => {
-        this.router.navigate(['/users']);
-      }, 1500);
-
-    });
-  }
+      this.userService.addUser({
+        name: this.userForm.value.name!,
+        email: this.userForm.value.email!
+      }).subscribe({
+        next: () => {
+          this.message = 'Utilisateur ajouté avec succès';
+          this.router.navigate(['/users']);
+        },
+        error: (err) => {
+          console.error('Erreur lors de l’ajout :', err);
+        }
+        });
+      }
   }
 }
