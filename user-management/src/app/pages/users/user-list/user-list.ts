@@ -23,10 +23,17 @@ export class UserListComponent implements OnInit{
   }
 
   loadUsers(): void {
-    this.userService.getUsers().subscribe(users => {
-    this.users = users;
-    this.filteredUsers = [...users];
-  });
+    const createdUser = history.state?.createdUser as User | undefined;
+      this.userService.getUsers().subscribe(users => {
+
+      if (users.length === 0 && createdUser) {
+        this.users = [createdUser];
+        this.filteredUsers = [createdUser];
+        return;
+      }
+      this.users = users;
+      this.filteredUsers = [...users];
+    });
   }
   deleteUser(id:number):void{
       console.log("CLICK DELETE", id);
@@ -42,6 +49,7 @@ export class UserListComponent implements OnInit{
     this.userService.deleteUser(id).subscribe(() => {
     // Suppression locale pour l'affichage
     this.users = this.users.filter(user => user.id !== id);
+    this.filteredUsers = this.filteredUsers.filter(user => user.id !== id);
     
     this.message='Utilisateur supprimé avec succès';
 
@@ -59,11 +67,12 @@ export class UserListComponent implements OnInit{
         this.filteredUsers = [...this.users];
          return;
     }
-      this.filteredUsers = this.users.filter(user =>
-    user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) //pour savoir si le nom contient ce que l’utilisateur a tapé (includes)
-  );
-}
+    this.filteredUsers = this.users.filter(user =>
+        user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) //pour savoir si le nom contient ce que l’utilisateur a tapé (includes)
+     );
+    }
   sortUsers():void{
     this.users.sort((a,b)=>a.name.localeCompare(b.name));
+    this.filteredUsers = [...this.users];
   }
 }
